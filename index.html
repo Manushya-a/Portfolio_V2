@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Terminal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <aside class="profile-card">
+      <img src="assets/profile.jpg" alt="Profile Photo" class="profile-img">
+      <h1 class="profile-name">John Doe</h1>
+      <p class="profile-title">Software Engineer</p>
+    </aside>
+    <main class="terminal-section">
+      <nav class="nav-bar">
+        <a href="#" class="nav-link">help</a>
+        <a href="#" class="nav-link">about</a>
+        <a href="#" class="nav-link">projects</a>
+        <a href="#" class="nav-link">skills</a>
+        <a href="#" class="nav-link">contact</a>
+      </nav>
+      <div class="terminal" id="terminal">
+        <div class="terminal-output" id="terminal-output"></div>
+        <div class="terminal-input-line">
+          <span class="terminal-prompt">user@portfolio:~$</span>
+          <input type="text" id="terminal-input" autocomplete="off" autofocus />
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html> 

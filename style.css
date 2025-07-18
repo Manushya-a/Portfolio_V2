@@ -1,0 +1,116 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #111;
+  color: #eee;
+  font-family: 'Fira Mono', 'Consolas', monospace;
+}
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+.profile-card {
+  background: #181818;
+  color: #00ff66;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+  border-right: 1px solid #222;
+}
+.profile-img {
+  width: 200px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 10px #000;
+}
+.profile-name {
+  font-size: 2rem;
+  margin: 0.5rem 0 0.2rem 0;
+  color: #00ff66;
+}
+.profile-title {
+  font-size: 1.1rem;
+  color: #33ffcc;
+  margin-bottom: 1rem;
+}
+.terminal-section {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #111;
+}
+.nav-bar {
+  display: flex;
+  gap: 1.2rem;
+  padding: 1rem 2rem 0.5rem 2rem;
+  border-bottom: 1px solid #222;
+}
+.nav-link {
+  color: #00ff66;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+.nav-link:hover {
+  color: #33ffcc;
+}
+.terminal {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background: #181818;
+  border-radius: 0 0 8px 8px;
+  margin: 1rem 2rem 2rem 2rem;
+  box-shadow: 0 0 20px #000a;
+}
+.terminal-output {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+  color: #eee;
+}
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+.terminal-prompt {
+  color: #00ff66;
+  margin-right: 0.5rem;
+}
+#terminal-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #33ffcc;
+  font-size: 1.1rem;
+  font-family: inherit;
+  width: 80%;
+}
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+  .profile-card {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #222;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+  }
+  .profile-img {
+    width: 100px;
+    height: 120px;
+    margin-bottom: 0;
+    margin-right: 1rem;
+  }
+} 
