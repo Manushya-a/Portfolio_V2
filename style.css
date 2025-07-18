@@ -1,24 +1,39 @@
-body {
+html, body {
+  height: 100%;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   background: #111;
   color: #eee;
   font-family: 'Fira Mono', 'Consolas', monospace;
+  overflow-x: hidden;
+}
+body {
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
 }
 .container {
   display: flex;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
+  width: 100vw;
+  overflow: hidden;
 }
 .profile-card {
-  background: #181818;
+  background: radial-gradient(circle at 0% 0%, #232323 0%, #232323 40%, #111 100%);
   color: #00ff66;
   width: 350px;
+  min-width: 250px;
+  max-width: 100vw;
+  height: 100vh;
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
   border-right: 1px solid #222;
+  overflow: auto;
 }
 .profile-img {
   width: 200px;
@@ -69,6 +84,9 @@ body {
   display: flex;
   flex-direction: column;
   background: #111;
+  min-width: 0;
+  overflow: hidden;
+  justify-content: flex-start;
 }
 .nav-bar {
   display: flex;
@@ -86,14 +104,16 @@ body {
   color: #33ffcc;
 }
 .terminal {
-  flex: 1;
+  flex: 0 1 auto;
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  padding: 1.5rem 2rem 2rem 2rem;
   background: #181818;
   border-radius: 0 0 8px 8px;
-  margin: 1rem 2rem 2rem 2rem;
+  margin: 0 2rem 2rem 2rem;
   box-shadow: 0 0 20px #000a;
+  min-width: 0;
+  overflow: auto;
 }
 .terminal-output {
   flex: 1;
@@ -108,7 +128,7 @@ body {
   font-size: 1.1rem;
 }
 .terminal-prompt {
-  color: #00ff66;
+  color: #3399ff;
   margin-right: 0.5rem;
 }
 #terminal-input {
@@ -123,15 +143,21 @@ body {
 @media (max-width: 900px) {
   .container {
     flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
   }
   .profile-card {
     width: 100%;
+    min-width: 0;
+    height: auto;
+    max-height: 300px;
     border-right: none;
     border-bottom: 1px solid #222;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     padding: 1rem;
+    overflow: hidden;
   }
   .profile-img {
     width: 100px;

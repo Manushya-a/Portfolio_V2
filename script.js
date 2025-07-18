@@ -13,12 +13,26 @@ const commands = {
 let history = [];
 let historyIndex = 0;
 
-function printOutput(html) {
+function printOutput(html, animate = false) {
   if (html) {
     const div = document.createElement('div');
-    div.innerHTML = html;
-    terminalOutput.appendChild(div);
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    if (animate) {
+      let i = 0;
+      function typeChar() {
+        if (i <= html.length) {
+          div.innerHTML = html.slice(0, i);
+          terminalOutput.appendChild(div);
+          terminalOutput.scrollTop = terminalOutput.scrollHeight;
+          i++;
+          setTimeout(typeChar, 12);
+        }
+      }
+      typeChar();
+    } else {
+      div.innerHTML = html;
+      terminalOutput.appendChild(div);
+      terminalOutput.scrollTop = terminalOutput.scrollHeight;
+    }
   }
 }
 
@@ -29,10 +43,10 @@ function handleCommand(cmd) {
     if (command === 'clear') {
       terminalOutput.innerHTML = '';
     } else {
-      printOutput(commands[command]);
+      printOutput(commands[command], true);
     }
   } else if (command) {
-    printOutput(`bash: ${command}: command not found`);
+    printOutput(`bash: ${command}: command not found`, true);
   }
 }
 
