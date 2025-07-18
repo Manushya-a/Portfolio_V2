@@ -38,6 +38,32 @@ body {
   color: #33ffcc;
   margin-bottom: 1rem;
 }
+.site-header {
+  width: 100%;
+  background: #181818;
+  color: #00ff66;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1.5rem 0 1rem 2.5rem;
+  border-bottom: 1px solid #222;
+  margin-bottom: 0.5rem;
+}
+.header-name {
+  font-size: 2.2rem;
+  margin: 0;
+  color: #00ff66;
+  letter-spacing: 1px;
+  text-align: left;
+}
+.header-title {
+  font-size: 1.1rem;
+  color: #33ffcc;
+  margin-top: 0.3rem;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
 .terminal-section {
   flex: 1;
   display: flex;
