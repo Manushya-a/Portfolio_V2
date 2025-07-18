@@ -2,11 +2,16 @@ const terminalInput = document.getElementById('terminal-input');
 const terminalOutput = document.getElementById('terminal-output');
 
 const commands = {
-  help: `Available commands: <span class="cmd">about</span>, <span class="cmd">projects</span>, <span class="cmd">skills</span>, <span class="cmd">contact</span>, <span class="cmd">clear</span>`,
+  welcome: `Welcome to my portfolio terminal! 👋<br>Type <span class="cmd">help</span> to see what you can do.`,
+  help: `Available commands: <span class="cmd">about</span>, <span class="cmd">projects</span>, <span class="cmd">skills</span>, <span class="cmd">education</span>, <span class="cmd">certifications</span>, <span class="cmd">leadership</span>, <span class="cmd">contact</span>, <span class="cmd">sudo</span>, <span class="cmd">clear</span>, <span class="cmd">welcome</span>`,
   about: `Hi! I'm John Doe, a passionate Software Engineer who loves building cool stuff!`,
   projects: `<ul><li><b>Portfolio Website</b> - A personal site with a terminal UI (2024)</li><li><b>Weather App</b> - Real-time weather with JS &amp; APIs (2023)</li><li><b>Task Manager</b> - Productivity tool for teams (2022)</li></ul>`,
   skills: `<b>Languages:</b> JavaScript, Python, C++<br><b>Frameworks:</b> React, Node.js, Express<br><b>Tools:</b> Git, Docker, AWS`,
+  education: `<b>B.Sc. Computer Science</b> - University of Example (2018-2022)<br><b>High School</b> - Example High (2014-2018)`,
+  certifications: `<ul><li>Microsoft Certified: Azure AI Fundamentals</li><li>Data Analyst Associate Certificate - DataCamp</li><li>SQL Associate Certificate - DataCamp</li><li>Microsoft Global Hackathon Volunteer</li></ul>`,
+  leadership: `<ul><li>Team Lead - Hackathon 2023</li><li>Mentor - Coding Bootcamp 2022</li><li>Club President - University Coding Club</li></ul>`,
   contact: `Email: johndoe@email.com<br>LinkedIn: linkedin.com/in/johndoe`,
+  sudo: `Permission denied: You are not in the sudoers file. This incident will be reported.`,
   clear: '',
 };
 
@@ -18,13 +23,34 @@ function printOutput(html, animate = false) {
     const div = document.createElement('div');
     if (animate) {
       let i = 0;
+      let typoCount = 0;
+      let isCorrecting = false;
+      let typoAt = -1;
+      let typoChar = '';
+      terminalOutput.appendChild(div); // Append once
       function typeChar() {
-        if (i <= html.length) {
+        // Only allow a few typos per line
+        const allowTypo = typoCount < 2 && Math.random() < 0.08 && i > 2 && i < html.length - 2;
+        if (!isCorrecting && allowTypo) {
+          // Insert a random wrong character
+          typoChar = String.fromCharCode(97 + Math.floor(Math.random() * 26));
+          div.innerHTML = html.slice(0, i) + typoChar;
+          terminalOutput.scrollTop = terminalOutput.scrollHeight;
+          isCorrecting = true;
+          typoAt = i;
+          typoCount++;
+          setTimeout(typeChar, 180); // Pause on typo
+        } else if (isCorrecting) {
+          // Simulate backspace (remove typo)
+          div.innerHTML = html.slice(0, typoAt);
+          terminalOutput.scrollTop = terminalOutput.scrollHeight;
+          isCorrecting = false;
+          setTimeout(typeChar, 120); // Short pause after correction
+        } else if (i <= html.length) {
           div.innerHTML = html.slice(0, i);
-          terminalOutput.appendChild(div);
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
           i++;
-          setTimeout(typeChar, 12);
+          setTimeout(typeChar, 25);
         }
       }
       typeChar();
@@ -42,6 +68,7 @@ function handleCommand(cmd) {
   if (commands[command] !== undefined) {
     if (command === 'clear') {
       terminalOutput.innerHTML = '';
+      terminalOutput.scrollTop = 0;
     } else {
       printOutput(commands[command], true);
     }
@@ -82,5 +109,28 @@ terminalOutput.parentElement.addEventListener('click', () => {
   terminalInput.focus();
 });
 
+// Apply retro block cursor to terminal input
+if (terminalInput) {
+  terminalInput.classList.add('custom-cursor');
+  terminalInput.addEventListener('focus', () => terminalInput.classList.add('custom-cursor'));
+  terminalInput.addEventListener('blur', () => terminalInput.classList.remove('custom-cursor'));
+}
+
 // Initial welcome message
-printOutput('Type <span class="cmd">help</span> to see available commands.'); 
+handleCommand('welcome');
+
+// Footer IST time updater
+function updateFooterTime() {
+  const now = new Date();
+  // Convert to IST (UTC+5:30)
+  const istOffset = 5.5 * 60 * 60 * 1000;
+  const ist = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + istOffset);
+  const h = String(ist.getHours()).padStart(2, '0');
+  const m = String(ist.getMinutes()).padStart(2, '0');
+  const s = String(ist.getSeconds()).padStart(2, '0');
+  const timeStr = `${h}:${m}:${s}`;
+  const footerTime = document.getElementById('footer-time');
+  if (footerTime) footerTime.textContent = timeStr;
+}
+setInterval(updateFooterTime, 1000);
+updateFooterTime(); 

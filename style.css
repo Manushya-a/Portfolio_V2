@@ -5,7 +5,7 @@ html, body {
   box-sizing: border-box;
   background: #111;
   color: #eee;
-  font-family: 'Fira Mono', 'Consolas', monospace;
+  font-family: 'DejaVu Sans Mono', 'Liberation Mono', 'Menlo', 'Consolas', 'Monaco', monospace;
   overflow-x: hidden;
 }
 body {
@@ -15,33 +15,37 @@ body {
 }
 .container {
   display: flex;
-  min-height: calc(100vh - 80px);
+  height: calc(100vh - 3.2rem - 2.2rem);
   width: 100vw;
   overflow: hidden;
+  box-sizing: border-box;
+  padding-bottom: 0;
 }
 .profile-card {
   background: radial-gradient(circle at 0% 0%, #232323 0%, #232323 40%, #111 100%);
   color: #00ff66;
-  width: 350px;
-  min-width: 250px;
-  max-width: 100vw;
-  height: 100vh;
+  flex: 4;
+  height: 100%;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  border-right: 1px solid #222;
+  border-right: 2px solid #008040;
   overflow: auto;
 }
 .profile-img {
-  width: 200px;
-  height: 250px;
+  width: 240px;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   box-shadow: 0 0 10px #000;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  filter: grayscale(100%);
 }
 .profile-name {
   font-size: 2rem;
@@ -61,26 +65,26 @@ body {
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
-  padding: 1.5rem 0 1rem 2.5rem;
-  border-bottom: 1px solid #222;
-  margin-bottom: 0.5rem;
+  padding: 1rem 0 0.7rem 2.5rem;
+  border-bottom: 2px solid #008040;
+  margin-bottom: 0.2rem;
 }
 .header-name {
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   margin: 0;
   color: #00ff66;
   letter-spacing: 1px;
   text-align: left;
 }
 .header-title {
-  font-size: 1.1rem;
-  color: #33ffcc;
-  margin-top: 0.3rem;
+  font-size: 1.15rem;
+  color: #fff;
+  margin-top: 0.2rem;
   letter-spacing: 0.5px;
   text-align: left;
 }
 .terminal-section {
-  flex: 1;
+  flex: 6;
   display: flex;
   flex-direction: column;
   background: #111;
@@ -107,25 +111,29 @@ body {
   flex: 0 1 auto;
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 2rem 2rem 2rem;
+  padding: 1.5rem 2rem 2rem 1rem;
   background: #181818;
   border-radius: 0 0 8px 8px;
-  margin: 0 2rem 2rem 2rem;
+  margin: 0 2rem 2rem 0;
   box-shadow: 0 0 20px #000a;
   min-width: 0;
   overflow: auto;
+  font-size: 1rem;
+  line-height: 1.4;
 }
 .terminal-output {
   flex: 1;
   overflow-y: auto;
   margin-bottom: 1rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: #eee;
+  line-height: 1.4;
 }
 .terminal-input-line {
   display: flex;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.4;
 }
 .terminal-prompt {
   color: #3399ff;
@@ -136,9 +144,44 @@ body {
   border: none;
   outline: none;
   color: #33ffcc;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-family: inherit;
   width: 80%;
+  caret-color: #33ffcc;
+  position: relative;
+  z-index: 1;
+  line-height: 1.4;
+}
+.typed-cmd {
+  color: #33ffcc;
+}
+.site-footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100vw;
+  background: #181818;
+  color: #00ff66;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 2.5rem;
+  font-family: 'DejaVu Sans Mono', 'Liberation Mono', 'Menlo', 'Consolas', 'Monaco', monospace;
+  font-size: 1rem;
+  border-top: 2px solid #008040;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+.footer-left {
+  color: #00ff66;
+  text-align: left;
+  flex: 1 1 0;
+}
+.footer-right {
+  color: #33ffcc;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  flex: 1 1 0;
 }
 @media (max-width: 900px) {
   .container {
@@ -149,6 +192,7 @@ body {
   .profile-card {
     width: 100%;
     min-width: 0;
+    flex: none;
     height: auto;
     max-height: 300px;
     border-right: none;
@@ -164,5 +208,12 @@ body {
     height: 120px;
     margin-bottom: 0;
     margin-right: 1rem;
+  }
+  .site-footer {
+    padding: 0.7rem 1rem;
+    font-size: 0.95rem;
+  }
+  .container {
+    padding-bottom: 64px;
   }
 } 
