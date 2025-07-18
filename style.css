@@ -6,12 +6,12 @@ html, body {
   background: #111;
   color: #eee;
   font-family: 'DejaVu Sans Mono', 'Liberation Mono', 'Menlo', 'Consolas', 'Monaco', monospace;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 body {
   min-height: 100vh;
   width: 100vw;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .container {
   display: flex;
@@ -144,6 +144,12 @@ body {
   background: #222;
   border-radius: 8px;
 }
+.terminal-output a,
+.terminal-output a:visited,
+.terminal-output a:active {
+  color: #3399ff;
+  text-decoration: underline;
+}
 .terminal-input-line {
   display: flex;
   align-items: center;
@@ -158,17 +164,17 @@ body {
   background: transparent;
   border: none;
   outline: none;
-  color: #33ffcc;
+  color: #1aff80;
   font-size: 1rem;
   font-family: inherit;
   width: 80%;
-  caret-color: #33ffcc;
+  caret-color: #1aff80;
   position: relative;
   z-index: 1;
   line-height: 1.4;
 }
 .typed-cmd {
-  color: #33ffcc;
+  color: #1aff80;
 }
 .site-footer {
   position: fixed;
