@@ -176,6 +176,18 @@ body {
 .typed-cmd {
   color: #1aff80;
 }
+.typing-cursor {
+  display: inline-block;
+  width: 0.7em;
+  background: transparent;
+  color: #00ff66;
+  font-weight: bold;
+  animation: blink-cursor 1s steps(1) infinite;
+}
+@keyframes blink-cursor {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
 .site-footer {
   position: fixed;
   left: 0;

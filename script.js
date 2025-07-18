@@ -3,7 +3,18 @@ const terminalOutput = document.getElementById('terminal-output');
 
 const commands = {
   welcome: `Welcome to my portfolio terminal! 👋<br>Type <span class="cmd">help</span> to see what you can do.`,
-  help: `Available commands: <span class="cmd">about</span>, <span class="cmd">projects</span>, <span class="cmd">skills</span>, <span class="cmd">education</span>, <span class="cmd">certifications</span>, <span class="cmd">leadership</span>, <span class="cmd">contact</span>, <span class="cmd">sudo</span>, <span class="cmd">clear</span>, <span class="cmd">welcome</span>`,
+  help: `🆘 <b>Help & Commands</b><br><br>Welcome to your interactive portfolio terminal! Here you can explore my background, skills, projects, and more—just like a real command line.<br><br>Type any of the following commands to learn more:<br><br><ul style='margin:0.5em 0 0 1.2em;'>
+<li><b>about</b> – Who I am and what I do</li>
+<li><b>projects</b> – My featured projects and contributions</li>
+<li><b>skills</b> – Languages, security concepts, and tools I use</li>
+<li><b>education</b> – My academic background</li>
+<li><b>certifications</b> – Certifications I have earned</li>
+<li><b>leadership</b> – Leadership and club roles</li>
+<li><b>contact</b> – How to reach me</li>
+<li><b>sudo</b> – Try it for fun</li>
+<li><b>clear</b> – Clear the terminal</li>
+<li><b>welcome</b> – Show the welcome message again</li>
+</ul><br>Use the navigation bar above to quickly fill the terminal with a command, or type it yourself and press Enter!`,
   about: `👋 <b>About Me</b><br><br>I'm Manav Acharya, a passionate student with a keen interest in <b>cyber security</b>.<br>I love exploring how things work under the hood, breaking and securing systems, and I'm always eager to learn more about the world of digital defense.`,
   projects: `💻 <b>Projects</b><br><br><ul style='margin-top:0.5em;'>
 <li><a href="https://github.com/Manushya-a/Smart_Remote_Keylogger" target="_blank">Smart Remote Keylogger</a> – Python script simulating a keylogger for educational purposes, using websockets and pynput. <br><span style='font-size:0.95em;color:#aaa;'>(For research/education only!)</span></li>
@@ -50,6 +61,8 @@ function printOutput(html, animate = false) {
   if (html) {
     const div = document.createElement('div');
     if (animate) {
+      // Hide the user input cursor while animating
+      if (terminalInput) terminalInput.style.caretColor = 'transparent';
       let i = 0;
       let typoCount = 0;
       let isCorrecting = false;
@@ -62,7 +75,7 @@ function printOutput(html, animate = false) {
         if (!isCorrecting && allowTypo) {
           // Insert a random wrong character
           typoChar = String.fromCharCode(97 + Math.floor(Math.random() * 26));
-          div.innerHTML = html.slice(0, i) + typoChar;
+          div.innerHTML = html.slice(0, i) + typoChar + '<span class="typing-cursor">|</span>';
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
           isCorrecting = true;
           typoAt = i;
@@ -70,16 +83,20 @@ function printOutput(html, animate = false) {
           setTimeout(typeChar, 180); // Pause on typo
         } else if (isCorrecting) {
           // Simulate backspace (remove typo)
-          div.innerHTML = html.slice(0, typoAt);
+          div.innerHTML = html.slice(0, typoAt) + '<span class="typing-cursor">|</span>';
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
           isCorrecting = false;
           setTimeout(typeChar, 120); // Short pause after correction
         } else if (i <= html.length) {
-          div.innerHTML = html.slice(0, i);
+          div.innerHTML = html.slice(0, i) + '<span class="typing-cursor">|</span>';
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
           i++;
           setTimeout(typeChar, 25);
         } else {
+          // Remove the cursor when done
+          div.innerHTML = html;
+          // Restore the user input cursor
+          if (terminalInput) terminalInput.style.caretColor = '#1aff80';
           // Add extra space after animated output
           const spacer = document.createElement('div');
           spacer.style.height = '0.7em';
