@@ -51,6 +51,11 @@ function printOutput(html, animate = false) {
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
           i++;
           setTimeout(typeChar, 25);
+        } else {
+          // Add extra space after animated output
+          const spacer = document.createElement('div');
+          spacer.style.height = '0.7em';
+          terminalOutput.appendChild(spacer);
         }
       }
       typeChar();
@@ -64,7 +69,7 @@ function printOutput(html, animate = false) {
 
 function handleCommand(cmd) {
   const command = cmd.trim().toLowerCase();
-  printOutput(`<span class="terminal-prompt">user@portfolio:~$</span> <span class="typed-cmd">${cmd}</span>`);
+  printOutput(`<span class="terminal-prompt">Manushya.a@portfolio:~$</span> <span class="typed-cmd">${cmd}</span>`);
   if (commands[command] !== undefined) {
     if (command === 'clear') {
       terminalOutput.innerHTML = '';
