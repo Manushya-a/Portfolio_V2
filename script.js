@@ -127,20 +127,18 @@ function handleCommand(cmd) {
         // First, make sure the frame is visible and not minimized
         imageFrame.style.display = 'block';
         imageFrame.classList.remove('minimized');
-        
-        // If the shutter is closed, open it with animation
-        if (shutter.classList.contains('closed')) {
+        // Always start with shutter closed
+        shutter.classList.remove('opening');
+        shutter.classList.add('closed');
+        isMinimized = false;
+        // After a short delay, open the shutter with animation
+        setTimeout(() => {
           shutter.classList.remove('closed');
           shutter.classList.add('opening');
-          
           setTimeout(() => {
             shutter.classList.remove('opening');
-            isMinimized = false;
           }, 400);
-        } else {
-          // If shutter is already open, just reset the state
-          isMinimized = false;
-        }
+        }, 120);
       }
       printOutput(commands[command], true);
     } else {
