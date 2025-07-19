@@ -59,7 +59,7 @@ const commands = {
 let history = [];
 let historyIndex = 0;
 
-function printOutput(html, animate = false) {
+function printOutput(html, animate = false, callback) {
   if (html) {
     const div = document.createElement('div');
     if (animate) {
@@ -82,27 +82,24 @@ function printOutput(html, animate = false) {
           isCorrecting = true;
           typoAt = i;
           typoCount++;
-          setTimeout(typeChar, 180); // Pause on typo
+          setTimeout(typeChar, 180);
         } else if (isCorrecting) {
-          // Simulate backspace (remove typo)
           div.innerHTML = html.slice(0, typoAt) + '<span class="typing-cursor">|</span>';
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
           isCorrecting = false;
-          setTimeout(typeChar, 120); // Short pause after correction
+          setTimeout(typeChar, 120);
         } else if (i <= html.length) {
           div.innerHTML = html.slice(0, i) + '<span class="typing-cursor">|</span>';
           terminalOutput.scrollTop = terminalOutput.scrollHeight;
           i++;
           setTimeout(typeChar, 25);
         } else {
-          // Remove the cursor when done
           div.innerHTML = html;
-          // Restore the user input cursor
           if (terminalInput) terminalInput.style.caretColor = '#1aff80';
-          // Add extra space after animated output
           const spacer = document.createElement('div');
           spacer.style.height = '0.7em';
           terminalOutput.appendChild(spacer);
+          if (callback) callback();
         }
       }
       typeChar();
@@ -110,6 +107,7 @@ function printOutput(html, animate = false) {
       div.innerHTML = html;
       terminalOutput.appendChild(div);
       terminalOutput.scrollTop = terminalOutput.scrollHeight;
+      if (callback) callback();
     }
   }
 }

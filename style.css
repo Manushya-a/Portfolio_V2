@@ -207,6 +207,25 @@ body {
   letter-spacing: 0.5px;
   text-align: left;
 }
+.header-contacts {
+  position: absolute;
+  right: 2.5rem;
+  top: 1.2rem;
+  display: flex;
+  gap: 1.7rem;
+  align-items: center;
+}
+.header-icon img {
+  width: 20px;
+  height: 20px;
+  display: block;
+  filter: brightness(0) invert(1) grayscale(0.1) contrast(100);
+  transition: filter 0.2s, transform 0.2s;
+}
+.header-icon:hover img {
+  filter: brightness(0) invert(1) grayscale(0.1) contrast(100) drop-shadow(0 0 4px #00ff66);
+  transform: scale(1.12);
+}
 .terminal-section {
   flex: 6;
   display: flex;
@@ -406,4 +425,53 @@ a:hover, button:hover, input:hover, .nav-link:hover {
   .container {
     padding-bottom: 64px;
   }
+} 
+
+/* CRT Switch-off Animation */
+.crt-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.4s;
+  opacity: 0;
+}
+
+.crt-overlay::before,
+.crt-overlay::after {
+  content: '';
+  position: absolute;
+  width: 100vw;
+  height: 50vh;
+  background: #00ff66;
+  box-shadow: 0 0 32px 8px #00ff66;
+  transition: height 0.5s cubic-bezier(.4,2,.6,1), opacity 0.5s cubic-bezier(.4,2,.6,1);
+  opacity: 1;
+  left: 0;
+  pointer-events: none;
+}
+
+.crt-overlay::before { top: 0; }
+.crt-overlay::after { bottom: 0; }
+
+.crt-overlay.shrink::before,
+.crt-overlay.shrink::after {
+  height: 0;
+  opacity: 0;
+}
+
+.crt-overlay.opacity-1::before,
+.crt-overlay.opacity-1::after {
+  height: 0;
+  opacity: 0;
+}
+
+.crt-overlay.opacity-1 {
+  background: #000;
 } 
