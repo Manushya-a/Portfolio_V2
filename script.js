@@ -177,6 +177,35 @@ if (terminalInput) {
   terminalInput.addEventListener('blur', () => terminalInput.classList.remove('custom-cursor'));
 }
 
+// Custom cursor functionality
+const cursorDot = document.querySelector('.cursor-dot');
+const cursorOutline = document.querySelector('.cursor-dot-outline');
+
+if (cursorDot && cursorOutline) {
+  let mouseX = 0;
+  let mouseY = 0;
+  let outlineX = 0;
+  let outlineY = 0;
+
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    
+    // Update dot position immediately
+    cursorDot.style.transform = `translate(${mouseX - 4}px, ${mouseY - 4}px)`;
+  });
+
+  // Animate outline with delay
+  function animateOutline() {
+    outlineX += (mouseX - outlineX) * 0.3;
+    outlineY += (mouseY - outlineY) * 0.3;
+    
+    cursorOutline.style.transform = `translate(${outlineX - 20}px, ${outlineY - 20}px)`;
+    requestAnimationFrame(animateOutline);
+  }
+  animateOutline();
+}
+
 // Initial welcome message
 handleCommand('welcome');
 

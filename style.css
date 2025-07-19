@@ -12,6 +12,7 @@ body {
   min-height: 100vh;
   width: 100vw;
   overflow: hidden;
+  cursor: none;
 }
 .container {
   display: flex;
@@ -215,6 +216,37 @@ body {
   font-variant-numeric: tabular-nums;
   text-align: right;
   flex: 1 1 0;
+}
+/* Custom Cursor */
+body {
+  cursor: none;
+}
+a, button, input, .nav-link, .terminal-input-line, .terminal-output {
+  cursor: none !important;
+}
+a:hover, button:hover, input:hover, .nav-link:hover {
+  cursor: none !important;
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #00ff66;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease;
+}
+.cursor-dot-outline {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9998;
+  transition: transform 0.3s ease;
 }
 @media (max-width: 900px) {
   .container {
