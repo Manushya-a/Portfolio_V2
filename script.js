@@ -53,7 +53,7 @@ const commands = {
          ***
           *
 </pre>`,
-  'display': `🖼️ <b>Display Command</b><br><br>Showing the profile image in the displayer window...<br><br><span style="color:#00ff66;">✓ Image frame restored</span><br><span style="color:#00ff66;">✓ Shutter opened</span><br><span style="color:#00ff66;">✓ Image visible</span>`,
+  'display': `🖼️ <b>Display Command</b><br><br>Showing the profile image in the displayer window...<br><br><span style="color:#00ff66;">✓ Image frame restored</span><br><span style="color:#00ff66;">✓ Image opened</span><br><span style="color:#00ff66;">✓ Image visible</span>`,
 };
 
 let history = [];
@@ -138,7 +138,7 @@ function handleCommand(cmd) {
           setTimeout(() => {
             shutter.classList.remove('opening');
           }, 400);
-        }, 120);
+        }, 5200);
       }
       printOutput(commands[command], true);
     } else {
@@ -272,6 +272,7 @@ if (closeButton) {
       shutter.classList.remove('closing');
       shutter.classList.add('closed');
       imageFrame.style.display = 'none';
+      if (terminalInput) terminalInput.focus();
     }, 400);
   });
 } else {
@@ -292,6 +293,7 @@ if (minimizeButton) {
         shutter.classList.add('closed');
         isMinimized = true;
         console.log('Shutter closed and frame minimized, isMinimized:', isMinimized);
+        if (terminalInput) terminalInput.focus();
       }, 400);
     } else {
       // Restore animation - shutter opens and frame restores
@@ -304,6 +306,7 @@ if (minimizeButton) {
         shutter.classList.remove('opening');
         isMinimized = false;
         console.log('Shutter opened and frame restored, isMinimized:', isMinimized);
+        if (terminalInput) terminalInput.focus();
       }, 400);
     }
   });
