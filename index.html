@@ -19,7 +19,19 @@
   </header>
   <div class="container">
     <aside class="profile-card">
-      <img src="assets/profile.jpg" alt="Profile Photo" class="profile-img">
+      <div class="image-frame" id="image-frame">
+        <div class="window-controls">
+          <button class="window-button close-button" id="close-button">×</button>
+          <button class="window-button minimize-button" id="minimize-button">−</button>
+        </div>
+        <div class="image-container">
+          <img src="assets/profile.jpg" alt="Profile Photo" class="profile-img">
+          <div class="shutter" id="shutter">
+            <div class="shutter-top"></div>
+            <div class="shutter-bottom"></div>
+          </div>
+        </div>
+      </div>
     </aside>
     <main class="terminal-section">
       <nav class="nav-bar">
@@ -31,6 +43,7 @@
         <a href="#" class="nav-link">certifications</a>
         <a href="#" class="nav-link">leadership</a>
         <a href="#" class="nav-link">contact</a>
+        <a href="#" class="nav-link">display</a>
         <a href="#" class="nav-link">sudo</a>
         <a href="#" class="nav-link">clear</a>
       </nav>

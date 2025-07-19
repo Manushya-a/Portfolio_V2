@@ -37,17 +37,139 @@ body {
   overflow: auto;
 }
 .profile-img {
-  width: 300px;
-  height: 380px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 18px;
-  margin-bottom: 1.2rem;
+  border-radius: 8px;
   box-shadow: 0 8px 32px 0 #000a;
   border: 3px solid rgba(0,255,102,0.18);
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   filter: grayscale(100%);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.image-frame {
+  position: relative;
+  width: 320px;
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  margin-bottom: 1.2rem;
+  border: 2px solid #444;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.image-frame.minimized {
+  transform: scale(0.7);
+  opacity: 0.6;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+  padding: 0 4px;
+}
+
+.window-button {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+  font-family: 'DejaVu Sans Mono', 'Liberation Mono', 'Menlo', 'Consolas', 'Monaco', monospace;
+  line-height: 1;
+}
+
+.close-button {
+  background: #ff5f56;
+}
+
+.close-button:hover {
+  background: #ff4444;
+  transform: scale(1.1);
+}
+
+.minimize-button {
+  background: #ffbd2e;
+}
+
+.minimize-button:hover {
+  background: #ffaa00;
+  transform: scale(1.1);
+}
+
+.image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  width: 100%;
+  height: 380px;
+}
+
+.shutter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.shutter-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: #111;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 11;
+}
+
+.shutter-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 0;
+  background: #111;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 11;
+}
+
+.shutter.closing .shutter-top {
+  height: 50%;
+}
+
+.shutter.closing .shutter-bottom {
+  height: 50%;
+}
+
+.shutter.closed .shutter-top {
+  height: 50%;
+}
+
+.shutter.closed .shutter-bottom {
+  height: 50%;
+}
+
+.shutter.opening .shutter-top {
+  height: 0;
+}
+
+.shutter.opening .shutter-bottom {
+  height: 0;
 }
 .profile-name {
   font-size: 2rem;
@@ -97,8 +219,11 @@ body {
 .nav-bar {
   display: flex;
   gap: 1.2rem;
-  padding: 1rem 2rem 0.5rem 2rem;
+  padding: 0.7rem 2rem 0.5rem 2rem;
   border-bottom: 1px solid #222;
+  justify-content: center;
+  align-items: center;
+  margin-top: -0.3rem;
 }
 .nav-link {
   color: #00ff66;

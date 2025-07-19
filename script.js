@@ -11,6 +11,7 @@ const commands = {
 <li><b>certifications</b> – Certifications I have earned</li>
 <li><b>leadership</b> – Leadership and club roles</li>
 <li><b>contact</b> – How to reach me</li>
+<li><b>display</b> – Show the profile image in the displayer window</li>
 <li><b>sudo</b> – Try it for fun</li>
 <li><b>clear</b> – Clear the terminal</li>
 <li><b>welcome</b> – Show the welcome message again</li>
@@ -52,6 +53,7 @@ const commands = {
          ***
           *
 </pre>`,
+  'display': `🖼️ <b>Display Command</b><br><br>Showing the profile image in the displayer window...<br><br><span style="color:#00ff66;">✓ Image frame restored</span><br><span style="color:#00ff66;">✓ Shutter opened</span><br><span style="color:#00ff66;">✓ Image visible</span>`,
 };
 
 let history = [];
@@ -119,6 +121,28 @@ function handleCommand(cmd) {
     if (command === 'clear') {
       terminalOutput.innerHTML = '';
       terminalOutput.scrollTop = 0;
+    } else if (command === 'display') {
+      // Restore the image frame and shutter
+      if (imageFrame && shutter) {
+        // First, make sure the frame is visible and not minimized
+        imageFrame.style.display = 'block';
+        imageFrame.classList.remove('minimized');
+        
+        // If the shutter is closed, open it with animation
+        if (shutter.classList.contains('closed')) {
+          shutter.classList.remove('closed');
+          shutter.classList.add('opening');
+          
+          setTimeout(() => {
+            shutter.classList.remove('opening');
+            isMinimized = false;
+          }, 400);
+        } else {
+          // If shutter is already open, just reset the state
+          isMinimized = false;
+        }
+      }
+      printOutput(commands[command], true);
     } else {
       printOutput(commands[command], true);
     }
@@ -224,3 +248,67 @@ function updateFooterTime() {
 }
 setInterval(updateFooterTime, 1000);
 updateFooterTime(); 
+
+// Window controls for image frame
+const imageFrame = document.getElementById('image-frame');
+const closeButton = document.getElementById('close-button');
+const minimizeButton = document.getElementById('minimize-button');
+const shutter = document.getElementById('shutter');
+
+console.log('Elements found:', {
+  imageFrame: !!imageFrame,
+  closeButton: !!closeButton,
+  minimizeButton: !!minimizeButton,
+  shutter: !!shutter
+});
+
+let isMinimized = false;
+
+if (closeButton) {
+  closeButton.addEventListener('click', () => {
+    console.log('Close button clicked');
+    // Add closing animation
+    shutter.classList.add('closing');
+    
+    setTimeout(() => {
+      shutter.classList.remove('closing');
+      shutter.classList.add('closed');
+      imageFrame.style.display = 'none';
+    }, 400);
+  });
+} else {
+  console.error('Close button not found!');
+}
+
+if (minimizeButton) {
+  minimizeButton.addEventListener('click', () => {
+    console.log('Minimize button clicked, isMinimized:', isMinimized);
+    if (!isMinimized) {
+      // Minimize animation - shutter closes and frame minimizes
+      console.log('Closing shutter and minimizing frame...');
+      shutter.classList.add('closing');
+      imageFrame.classList.add('minimized');
+      
+      setTimeout(() => {
+        shutter.classList.remove('closing');
+        shutter.classList.add('closed');
+        isMinimized = true;
+        console.log('Shutter closed and frame minimized, isMinimized:', isMinimized);
+      }, 400);
+    } else {
+      // Restore animation - shutter opens and frame restores
+      console.log('Opening shutter and restoring frame...');
+      imageFrame.classList.remove('minimized');
+      shutter.classList.remove('closed');
+      shutter.classList.add('opening');
+      
+      setTimeout(() => {
+        shutter.classList.remove('opening');
+        isMinimized = false;
+        console.log('Shutter opened and frame restored, isMinimized:', isMinimized);
+      }, 400);
+    }
+  });
+} else {
+  console.error('Minimize button not found!');
+} 
