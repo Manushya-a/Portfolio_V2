@@ -2,7 +2,7 @@ const terminalInput = document.getElementById('terminal-input');
 const terminalOutput = document.getElementById('terminal-output');
 
 const commands = {
-  welcome: `Welcome to my portfolio terminal! 👋<br>Type <span class="cmd">help</span> to see what you can do.`,
+  welcome: `Namasate & Welcome to my portfolio terminal! 👋<br>Type <span class="cmd">'help'</span> to see what you can do.`,
   help: `🆘 <b>Help & Commands</b><br><br>Welcome to your interactive portfolio terminal! Here you can explore my background, skills, projects, and more—just like a real command line.<br><br>Type any of the following commands to learn more:<br><br><ul style='margin:0.5em 0 0 1.2em;'>
 <li><b>about</b> – Who I am and what I do</li>
 <li><b>projects</b> – My featured projects and contributions</li>
