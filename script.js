@@ -24,7 +24,7 @@ const commands = {
 </ul>`,
   skills: `🛡️ <b>Skills</b><br><br><b>Languages:</b> C++, Python, JavaScript<br><b>Security Concepts:</b> Network Security, Web Application Security<br><b>Tools:</b> N-map, Burp Suite, Wireshark`,
   education: `🎓 <b>Education</b><br><br>VIT Bhopal University: CGPA 8.61`,
-  certifications: `📜 <b>Certifications</b><br><br><ul style='margin-top:0.5em;'><li>Google Cybersecurity Professional Certificate V2</li><li>The Bits and Bytes of Computer Networking</li></ul>`,
+  certifications: `📜 <b>Certifications</b><br><br><ul style='margin-top:0.5em;'><li>eLearnSecurity Junior Penetration Tester (eJPT)</li><li>Google Cybersecurity Professional Certificate V2</li><li>The Bits and Bytes of Computer Networking</li></ul>`,
   leadership: `🌟 <b>Leadership</b><br><br><ul style='margin-top:0.5em;'>
 <li><b>Student Welfare Core Team</b><ul style='margin:0.3em 0 0.7em 1.2em;'>
 <li style='list-style-type:none;'>&mdash; Served as Master of Ceremonies (MC) for the college’s annual fests, hosting events with 6000+ attendees.</li>
